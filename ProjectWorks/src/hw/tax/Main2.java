@@ -49,7 +49,7 @@ public class Main2 {
                     String expensesStr = s.nextLine();
                     int userExpenses = Integer.parseInt(expensesStr);
                     expenses += userExpenses;
-                    System.out.println("Сумма доходов: " + expenses);
+                    System.out.println("Сумма расходов: " + expenses);
                     break;
 
                 case 3:
