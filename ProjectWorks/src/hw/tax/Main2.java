@@ -27,7 +27,7 @@ public class Main2 {
         int expenses = 0;
         while (true) {
             System.out.println("Выберите операцию и введите ее номер:\n 1. Добавить новый доход\n " +
-                    "2. Добавить новый расход\n 3.Выбрать систему налогооблажения");
+                    "2. Добавить новый расход\n 3.Выбрать систему налогообложения");
             String input = s.nextLine();
             if (input.equals("end")) {
                 System.out.println("Программа завершена!");
