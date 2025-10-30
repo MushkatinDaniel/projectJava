@@ -26,11 +26,9 @@ public class Main {
         deals[4] = new Sale("Сервис", 90000);
 
         for (int i = 0; i< deals.length; i++) {
-            System.out.println("  " + (i + 1) + ". " + deals[i].getComment());
+            System.out.println((i + 1) + ". " + deals[i].getComment());
         }
-
+        
         company.applyDeals(deals);
-
-
     }
 }
