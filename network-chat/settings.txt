@@ -1,0 +1,4 @@
+# Настройки сервера и клиента
+host=localhost
+port=8080
+log=file.log
