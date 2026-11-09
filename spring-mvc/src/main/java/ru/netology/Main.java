@@ -16,21 +16,21 @@ public class Main {
   private static final String SERVLET_MAPPING = "/";
 
   public static void main(String[] args) throws IOException, LifecycleException {
-    // рабочая папка для Tomcat (логи, временные файлы)
+   
     final var baseDir = Files.createTempDirectory("tomcat").toAbsolutePath().toString();
 
     final var tomcat = new Tomcat();
     tomcat.setBaseDir(baseDir);
     tomcat.setPort(PORT);
-    tomcat.getConnector(); // создаёт HTTP-коннектор на указанном порту
+    tomcat.getConnector(); 
 
     final var context = tomcat.addContext(CONTEXT_PATH, baseDir);
 
-    // контекст Spring: настройки берутся из WebConfig
+  
     final var springContext = new AnnotationConfigWebApplicationContext();
     springContext.register(WebConfig.class);
 
-    // DispatcherServlet — единственный сервлет, дальше запросы раздаёт Spring
+   
     final var dispatcherServlet = new DispatcherServlet(springContext);
     Tomcat.addServlet(context, SERVLET_NAME, dispatcherServlet).setLoadOnStartup(1);
     context.addServletMappingDecoded(SERVLET_MAPPING, SERVLET_NAME);
