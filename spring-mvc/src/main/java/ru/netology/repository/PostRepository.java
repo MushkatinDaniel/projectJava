@@ -12,12 +12,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
-/**
- * In-memory репозиторий, безопасный для вызова из разных потоков.
- * <p>
- * Посты лежат в {@link ConcurrentHashMap}, новые id выдаёт {@link AtomicLong}:
- * два потока никогда не получат один и тот же id.
- */
+
 @Repository
 public class PostRepository {
   private static final long NEW_POST_ID = 0;
@@ -26,7 +21,7 @@ public class PostRepository {
   private final AtomicLong idCounter = new AtomicLong(0);
 
   public List<Post> all() {
-    // копия в новый список, отсортированная по id: безопасно итерироваться снаружи
+   
     return posts.values().stream()
         .sorted(Comparator.comparingLong(Post::getId))
         .collect(Collectors.toList());
@@ -36,11 +31,7 @@ public class PostRepository {
     return Optional.ofNullable(posts.get(id));
   }
 
-  /**
-   * id == 0 — создание: присваиваем новый id и сохраняем.
-   * id != 0 — обновление: заменяем существующий пост.
-   * Если поста с таким id нет — бросаем {@link NotFoundException} (сервлет отдаст 404).
-   */
+ 
   public Post save(Post post) {
     if (post.getId() == NEW_POST_ID) {
       final var newId = idCounter.incrementAndGet();
@@ -49,7 +40,7 @@ public class PostRepository {
       return post;
     }
 
-    // проверка «пост есть» и замена выполняются атомарно для этого ключа
+   
     final var updated = posts.computeIfPresent(post.getId(), (id, old) -> post);
     if (updated == null) {
       throw new NotFoundException("Post with id " + post.getId() + " not found");
