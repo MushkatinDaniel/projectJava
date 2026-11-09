@@ -57,7 +57,7 @@ public class PostRepository {
     return updated;
   }
 
-  public void removeById(long id) {
-    posts.remove(id);
+  public boolean removeById(long id) {
+    return posts.remove(id) != null;
   }
 }
