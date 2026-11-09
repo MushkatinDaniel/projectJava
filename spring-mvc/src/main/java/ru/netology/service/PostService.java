@@ -27,7 +27,9 @@ public class PostService {
     return repository.save(post);
   }
 
-  public void removeById(long id) {
-    repository.removeById(id);
+   public void removeById(long id) {
+    if (!repository.removeById(id)) {
+      throw new NotFoundException("Post with id " + id + " not found");
+    }
   }
 }
